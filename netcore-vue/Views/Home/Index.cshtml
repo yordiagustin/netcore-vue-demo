@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="index">
+    <h1 class="title"> Registro de Alumnos </h1>
+    <input type="text" placeholder="Ingresa tu nombre" v-model="name"/>
+    <mensaje-error-vue v-show="isVisible"></mensaje-error-vue>
+    <button v-on:click="registrarAlumnos">Registrar</button>
+    <ul v-for="name in names">
+       <li>Nombre: {{name}}</li>
+    </ul>
+</div>
+
+<style>
+    .title{
+        font-size:2em;
+        color: #5736FB;
+    }
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    Vue.component('mensaje-error-vue', {
+    template:'<h4>Este es un mensaje de error</h4>'
+    })
+
+    var app = new Vue({
+    el: '#index',
+    data:{
+        name:'',
+        names:[
+            
+        ],
+        isVisible: false
+    },
+    methods:{
+        saludoVue: function(){
+            alert("Hola " + this.name + ". Eres bienvenido." )
+        },
+        registrarAlumnos: function() {
+            if(this.name==''){
+                this.isVisible=true;
+                return;
+            }
+            else
+            {
+                this.isVisible=false;
+                this.names.push(this.name);
+            }
+            this.name = ''
+        }
+    }
+})
+
+</script>
